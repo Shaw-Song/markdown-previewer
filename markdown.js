@@ -1,6 +1,6 @@
 import React from "https://cdn.skypack.dev/react";
 import ReactDOM from "https://cdn.skypack.dev/react-dom";
-const initialText = `# Welcome!
+const initialText=`# Welcome!
 
 ## This is a sub-heading...
 ### And here's some other cool stuff:
@@ -52,50 +52,50 @@ marked.use({
   sanitize: false,
   smartLists: false,
   smartypants: false,
-  xhtml: false });
-
+  xhtml: false
+});
 
 class Markdown extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
-      input: initialText };
-
-    this.handleChange = this.handleChange.bind(this);
+      input: initialText
+    };
+    this.handleChange=this.handleChange.bind(this);
   }
   componentDidMount() {
     document.getElementById("editor").defaultValue = initialText;
   }
 
-  handleChange(event) {
+  handleChange(event){
     this.setState(
-    {
-      input: event.target.value });
-
-
+      {
+        input:event.target.value
+      }
+    );
   }
-  render() {
-    return /*#__PURE__*/(
-      React.createElement("div", { class: "row" }, /*#__PURE__*/
-      React.createElement("div", { class: "col-xs-6" }, /*#__PURE__*/
-      React.createElement("div", { class: "leftWrapper" }, /*#__PURE__*/
-      React.createElement("h1", { className: "markdownHeader" }, "Editor"), /*#__PURE__*/
-      React.createElement("hr", { className: "line" }), /*#__PURE__*/
-      React.createElement("textarea", { id: "editor", onChange: this.handleChange }))), /*#__PURE__*/
+  render(){
+    return (
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="leftWrapper">
+            <h1 class="markdownHeader">Editor</h1>
+            <hr class="line" />
+            <textarea id="editor" onChange={this.handleChange}/>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="rightWrapper">
+            <h1 class="markdownHeader">Previewer</h1>
+            <hr class="line" />
+            <div id="wrapPreview">
+              <div id="preview" dangerouslySetInnerHTML={{__html: marked(this.state.input)}}></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
 
-
-      React.createElement("div", { class: "col-xs-6" }, /*#__PURE__*/
-      React.createElement("div", { class: "rightWrapper" }, /*#__PURE__*/
-      React.createElement("h1", { className: "markdownHeader" }, "Previewer"), /*#__PURE__*/
-      React.createElement("hr", { className: "line" }), /*#__PURE__*/
-      React.createElement("div", { id: "wrapPreview" }, /*#__PURE__*/
-      React.createElement("div", { id: "preview", dangerouslySetInnerHTML: { __html: marked(this.state.input) } }))))));
-
-
-
-
-
-  }}
-;
-
-ReactDOM.render( /*#__PURE__*/React.createElement(Markdown, null), document.getElementById("root"));
+ReactDOM.render(<Markdown />, document.getElementById("root"));
